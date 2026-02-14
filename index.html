@@ -47,8 +47,43 @@
             max-width: 400px;
             position: relative;
             backdrop-filter: blur(15px);
+            animation: fadeIn 0.8s ease-out;
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* LANDING PAGE STYLES */
+        .landing-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--rose));
+        }
+
+        .royal-title {
+            font-family: 'Playfair Display';
+            font-size: 2.2rem;
+            color: var(--champagne);
+            margin: 0;
+        }
+
+        .royal-subtitle {
+            font-family: 'Dancing Script';
+            font-size: 1.4rem;
+            color: var(--rose);
+            margin-top: 5px;
+        }
+
+        /* PREVIOUS STYLES INTEGRATED */
         #arena {
             position: relative;
             width: 100%;
@@ -170,12 +205,6 @@
         }
 
         /* TICKET UI */
-        #ticket-to-capture {
-            padding: 10px;
-            border-radius: 20px;
-            transition: 0.3s;
-        }
-
         .ticket-container {
             background: var(--petal);
             color: var(--crimson);
@@ -231,7 +260,8 @@
         }
 
         .snapshot-mode .btn-royal,
-        .snapshot-mode .share-actions {
+        .snapshot-mode .share-actions,
+        .snapshot-mode .nav-btn {
             display: none !important;
         }
     </style>
@@ -239,21 +269,33 @@
 
 <body>
 
-    <div id="creator-screen" class="luxury-card">
-        <h2 style="font-family: 'Playfair Display'; color: var(--champagne); margin:0;">Royal Decree</h2>
-        <div class="gender-selector">
+    <div id="landing-page" class="luxury-card">
+        <div class="landing-icon">💌</div>
+        <h1 class="royal-title">Royal Love Trial</h1>
+        <p class="royal-subtitle">A Quest for Your Beloved</p>
+        <p style="font-size: 0.8rem; opacity: 0.8; margin: 20px 0; line-height: 1.6;">
+            Create a custom romantic challenge.<br>
+            If they pass the trial, they earn a special<br>
+            <b>Valentine's Ticket</b> from you.
+        </p>
+        <button class="btn-royal" onclick="showCreator()">Begin the Decree</button>
+    </div>
+
+    <div id="creator-screen" class="luxury-card hidden">
+        <h2 style="font-family: 'Playfair Display'; color: var(--champagne); margin:0;">Create the Trial</h2>
+        <div class="gender-selector" style="margin-top: 15px;">
             <button class="gender-btn active" id="btn-m" onclick="setGender('M')">KING 👑</button>
             <button class="gender-btn" id="btn-f" onclick="setGender('F')">QUEEN 👸</button>
         </div>
-        <input type="text" id="c-target" placeholder="Partner's Name">
-        <input type="text" id="c-ques" placeholder="The Secret Question">
-        <input type="text" id="c-correct" placeholder="The Correct Answer">
+        <input type="text" id="c-target" placeholder="Whom is this for?">
+        <input type="text" id="c-ques" placeholder="Your Secret Question">
+        <input type="text" id="c-correct" placeholder="The Truth (Correct)">
         <input type="text" id="c-w1" placeholder="Wrong Option 1">
         <input type="text" id="c-w2" placeholder="Wrong Option 2">
-        <input type="text" id="c-reward" placeholder="The Reward">
-        <button class="btn-royal" onclick="generateLink()">Seal & Copy Link</button>
+        <input type="text" id="c-reward" placeholder="The Reward (e.g. A Kiss)">
+        <button class="btn-royal" onclick="generateLink()">Forge Magic Link</button>
         <div id="link-box" class="hidden"
-            style="margin-top:10px; font-size:0.5rem; border:1px solid var(--rose); padding:8px; word-break:break-all; background: rgba(0,0,0,0.5);">
+            style="margin-top:10px; font-size:0.55rem; border:1px dashed var(--rose); padding:10px; word-break:break-all; background: rgba(0,0,0,0.5);">
         </div>
     </div>
 
@@ -287,15 +329,13 @@
             <p style="font-family: 'Dancing Script'; font-size: 1.2rem; color: var(--rose); margin-top: 10px;">"Forever
                 is a long time, and I want to spend it with you."</p>
         </div>
-
         <div class="share-actions">
-            <!-- <button class="btn-outline" onclick="prepareSnapshot()">📸 Snapshot</button> -->
-            <button class="btn-outline" onclick="shareTrial()">🔗 Share App</button>
+            <button class="btn-outline" onclick="prepareSnapshot()">📸 Take Screenshot</button>
         </div>
-        <button class="btn-royal" onclick="location.href=window.location.pathname">Create New</button>
+        <button class="btn-royal nav-btn" onclick="location.href=window.location.pathname">Create New</button>
         <p id="snapshot-hint" class="hidden" style="font-size: 0.6rem; color: var(--champagne); margin-top: 10px;">
-            Buttons hidden. Take your screenshot now!<br><span onclick="exitSnapshot()"
-                style="text-decoration: underline; cursor: pointer;">Click here to go back</span></p>
+            Buttons hidden. Screenshot now!<br><span onclick="exitSnapshot()"
+                style="text-decoration: underline; cursor: pointer;">Go Back</span></p>
     </div>
 
     <script>
@@ -306,6 +346,11 @@
             'M': { sass: ["Try again? 🌹", "Are you testing me? 🤨"], sorry: ["Don't be mad... 🙇‍♀️", "I promise I know this!"] },
             'F': { sass: ["How could you? 😒", "Do you even love me? 💅"], sorry: ["I'm so sorry! 😭", "Forgive me! 🙇‍♂️"] }
         };
+
+        function showCreator() {
+            document.getElementById('landing-page').classList.add('hidden');
+            document.getElementById('creator-screen').classList.remove('hidden');
+        }
 
         function setGender(g) {
             selectedGender = g;
@@ -323,8 +368,9 @@
             if (!data.t || !data.q || !data.c || !data.r) return alert("Fill all details!");
             const blob = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
             const url = window.location.origin + window.location.pathname + "?trial=" + blob;
-            document.getElementById('link-box').innerText = url;
-            document.getElementById('link-box').classList.remove('hidden');
+            const linkBox = document.getElementById('link-box');
+            linkBox.innerText = url;
+            linkBox.classList.remove('hidden');
             navigator.clipboard.writeText(url);
             alert("Magic Link Copied! Send it to your partner.");
         }
@@ -332,7 +378,7 @@
         window.onload = () => {
             const params = new URLSearchParams(window.location.search);
             if (params.has('trial')) {
-                document.getElementById('creator-screen').classList.add('hidden');
+                document.getElementById('landing-page').classList.add('hidden');
                 document.getElementById('player-screen').classList.remove('hidden');
                 questData = JSON.parse(decodeURIComponent(escape(atob(params.get('trial')))));
                 document.getElementById('p2').innerText = questData.g === 'M' ? "🤴" : "👸";
@@ -388,29 +434,14 @@
             }
         }
 
-        /* NEW SHARING FUNCTIONS */
         function prepareSnapshot() {
-            document.querySelector('.luxury-card').classList.add('snapshot-mode');
+            document.querySelector('#reward-screen').classList.add('snapshot-mode');
             document.getElementById('snapshot-hint').classList.remove('hidden');
-            alert("Buttons are hidden for a clean photo. Take a screenshot now!");
         }
 
         function exitSnapshot() {
-            document.querySelector('.luxury-card').classList.remove('snapshot-mode');
+            document.querySelector('#reward-screen').classList.remove('snapshot-mode');
             document.getElementById('snapshot-hint').classList.add('hidden');
-        }
-
-        function shareTrial() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Royal Love Trial',
-                    text: 'I completed the challenge! Can you?',
-                    url: window.location.href
-                });
-            } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert("Link copied to clipboard for sharing!");
-            }
         }
     </script>
 </body>
