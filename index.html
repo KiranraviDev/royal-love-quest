@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Royal Love Trial 2026</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --rose: #ff8fa3;
+            --crimson: #800f2f;
+            --champagne: #f3e5ab;
+            --petal: #fff0f3;
+            --gold-glow: rgba(243, 229, 171, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #4a0404, #000);
+            margin: 0;
+            color: var(--petal);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .luxury-card {
+            background: rgba(20, 0, 0, 0.85);
+            padding: 30px 20px;
+            border-radius: 40px;
+            border: 1px solid var(--gold-glow);
+            box-shadow: 0 0 50px rgba(128, 15, 47, 0.4);
+            text-align: center;
+            width: 92%;
+            max-width: 420px;
+            position: relative;
+            backdrop-filter: blur(15px);
+            z-index: 10;
+        }
+
+        /* The Emotional Arena */
+        #arena {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .char {
+            position: absolute;
+            font-size: 3.5rem;
+            transition: all 1.2s ease;
+            bottom: 20px;
+        }
+
+        #p1 {
+            left: 10%;
+            transform: scaleX(-1);
+        }
+
+        /* Player answering */
+        #p2 {
+            right: 10%;
+        }
+
+        /* Creator watching */
+        #hug {
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            font-size: 5rem;
+            bottom: 20px;
+            opacity: 0;
+        }
+
+        /* Speech Bubbles */
+        .msg-bubble {
+            position: absolute;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: 0.4s;
+            max-width: 140px;
+            line-height: 1.3;
+        }
+
+        #p1-msg {
+            background: var(--petal);
+            color: var(--crimson);
+            left: 5%;
+            top: 70px;
+        }
+
+        #p2-msg {
+            background: var(--champagne);
+            color: #300;
+            right: 5%;
+            top: 30px;
+            border-radius: 15px 15px 2px 15px;
+        }
+
+        /* Forms & Buttons */
+        .gender-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .gender-btn {
+            padding: 12px;
+            border: 1px solid var(--champagne);
+            background: transparent;
+            color: var(--champagne);
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100px;
+            font-family: 'Playfair Display';
+            transition: 0.3s;
+        }
+
+        .gender-btn.active {
+            background: var(--champagne);
+            color: #000;
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border-radius: 15px;
+            border: 1px solid var(--gold-glow);
+            background: rgba(0, 0, 0, 0.4);
+            color: var(--champagne);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .btn-royal {
+            background: linear-gradient(135deg, var(--rose), var(--crimson));
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(255, 143, 163, 0.2);
+        }
+
+        .opt-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--petal);
+            padding: 14px;
+            border-radius: 15px;
+            width: 100%;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-style: italic;
+        }
+
+        .opt-btn:hover {
+            border-color: var(--rose);
+            background: rgba(255, 143, 163, 0.1);
+        }
+
+        /* THE TICKET UI */
+        .ticket-container {
+            margin-top: 20px;
+            background: var(--petal);
+            color: var(--crimson);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--champagne);
+        }
+
+        .ticket-header {
+            background: var(--crimson);
+            color: var(--champagne);
+            padding: 8px;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            border-bottom: 2px dashed var(--petal);
+        }
+
+        .ticket-body {
+            padding: 25px 15px;
+            position: relative;
+            background-image: radial-gradient(circle at 0 50%, transparent 12px, var(--petal) 13px),
+                radial-gradient(circle at 100% 50%, transparent 12px, var(--petal) 13px);
+        }
+
+        .ticket-reward {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #4a0404;
+            margin: 10px 0;
+        }
+
+        .ticket-stub {
+            background: var(--champagne);
+            color: #000;
+            padding: 8px;
+            font-size: 0.6rem;
+            font-weight: bold;
+        }
+
+        .valentine-wish {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--champagne);
+            margin-bottom: 5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+                opacity: 0.8;
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="creator-screen" class="luxury-card">
+        <h2 style="font-family: 'Playfair Display'; color: var(--champagne); margin-top:0;">Royal Architect</h2>
+        <p style="font-size: 0.75rem; color: var(--rose); margin-bottom: 15px;">Who are you in this story?</p>
+
+        <div class="gender-selector">
+            <button class="gender-btn active" id="btn-m" onclick="setGender('M')">KING 👑</button>
+            <button class="gender-btn" id="btn-f" onclick="setGender('F')">QUEEN 👸</button>
+        </div>
+
+        <input type="text" id="c-target" placeholder="Partner's Name">
+        <input type="text" id="c-ques" placeholder="The Question Only We Know">
+        <input type="text" id="c-correct" placeholder="The Truth (Correct)">
+        <input type="text" id="c-w1" placeholder="A Little Lie #1">
+        <input type="text" id="c-w2" placeholder="A Little Lie #2">
+        <input type="text" id="c-reward" placeholder="The Reward (e.g. A Candlelight Dinner)">
+
+        <button class="btn-royal" onclick="generateLink()">Seal Magic Link</button>
+        <div id="link-box" class="hidden"
+            style="margin-top:15px; font-size:0.6rem; border:1px solid var(--rose); padding:8px; word-break:break-all;">
+        </div>
+    </div>
+
+    <div id="player-screen" class="luxury-card hidden">
+        <div id="arena">
+            <div id="p1-msg" class="msg-bubble"></div>
+            <div id="p2-msg" class="msg-bubble"></div>
+            <div id="p1" class="char"></div>
+            <div id="p2" class="char"></div>
+            <div id="hug" class="char">👩‍❤️‍👨</div>
+        </div>
+        <div id="quiz-area">
+            <h3 style="font-family: 'Playfair Display'; color: var(--champagne); font-size: 1.1rem;" id="display-q">
+            </h3>
+            <div id="options-area"></div>
+        </div>
+    </div>
+
+    <div id="reward-screen" class="luxury-card hidden">
+        <div class="valentine-wish">Happy Valentine's Day</div>
+        <div class="ticket-container">
+            <div class="ticket-header">ROYAL LOVE PASS • ADMIT ONE</div>
+            <div class="ticket-body">
+                <p style="font-size: 0.6rem; margin: 0; opacity: 0.7;">REDEEMABLE BY</p>
+                <div style="font-family: 'Playfair Display'; font-weight: bold; font-size: 1.1rem;" id="final-name">
+                </div>
+                <div class="ticket-reward" id="final-prize"></div>
+                <p style="font-size: 0.5rem; margin: 0; letter-spacing: 1px;">VALID ACROSS ALL LIFETIMES</p>
+            </div>
+            <div class="ticket-stub">SERIAL: LOVE-2026-VAL</div>
+        </div>
+        <p style="font-family: 'Dancing Script'; font-size: 1.5rem; color: var(--rose); margin-top: 15px;">Always &
+            Forever.</p>
+        <button class="btn-royal" style="padding: 10px; font-size: 0.7rem; width: auto;"
+            onclick="location.href=window.location.pathname">Create New</button>
+    </div>
+
+    <script>
+        let selectedGender = 'M';
+        let questData = {};
+        const prefixes = ["Perhaps ", "Simply ", "Always ", "Only ", "Actually "];
+
+        const dialogues = {
+            'M': { // King created, Queen plays
+                sass: ["My Queen, really? 🤨", "Are you testing me? 🌹", "Try again, beautiful.", "Think deeply..."],
+                sorry: ["I'll fix it! 🥺", "Don't be mad... 🙇‍♀️", "I promise I know this!"]
+            },
+            'F': { // Queen created, King plays
+                sass: ["How could you forget? 😒", "Do you even love me? 💅", "Wrong answer, mister!", "I'm waiting... 🥀"],
+                sorry: ["I'm so sorry! 😭", "Forgive me, My Queen! 🙇‍♂️", "One more chance!"]
+            }
+        };
+
+        function setGender(g) {
+            selectedGender = g;
+            document.getElementById('btn-m').classList.toggle('active', g === 'M');
+            document.getElementById('btn-f').classList.toggle('active', g === 'F');
+        }
+
+        function generateLink() {
+            const data = {
+                g: selectedGender,
+                t: document.getElementById('c-target').value,
+                q: document.getElementById('c-ques').value,
+                c: document.getElementById('c-correct').value,
+                w1: document.getElementById('c-w1').value,
+                w2: document.getElementById('c-w2').value,
+                r: document.getElementById('c-reward').value
+            };
+            if (!data.t || !data.q || !data.c || !data.r) return alert("Fill every detail with love!");
+            const blob = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+            const url = window.location.origin + window.location.pathname + "?trial=" + blob;
+            const linkBox = document.getElementById('link-box');
+            linkBox.innerText = url;
+            linkBox.classList.remove('hidden');
+            navigator.clipboard.writeText(url);
+            alert("The Decree is forged and copied!");
+        }
+
+        window.onload = () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('trial')) {
+                document.getElementById('creator-screen').classList.add('hidden');
+                document.getElementById('player-screen').classList.remove('hidden');
+                questData = JSON.parse(decodeURIComponent(escape(atob(params.get('trial')))));
+
+                // Set roles: Creator (p2) and Player (p1)
+                document.getElementById('p2').innerText = questData.g === 'M' ? "🤴" : "👸";
+                document.getElementById('p1').innerText = questData.g === 'M' ? "💃" : "🏃‍♂️";
+                document.getElementById('display-q').innerText = `"${questData.q}"`;
+                renderOptions();
+            }
+        };
+
+        function renderOptions() {
+            const area = document.getElementById('options-area');
+            area.innerHTML = '';
+            let opts = [
+                { t: questData.c, is: true },
+                { t: questData.w1, is: false },
+                { t: questData.w2, is: false }
+            ].sort(() => Math.random() - 0.5);
+
+            opts.forEach(o => {
+                const btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                const p = prefixes[Math.floor(Math.random() * prefixes.length)];
+                btn.innerText = p + o.t;
+                btn.onclick = () => checkAnswer(o.is);
+                area.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(isCorrect) {
+            const p1m = document.getElementById('p1-msg');
+            const p2m = document.getElementById('p2-msg');
+            const p1 = document.getElementById('p1');
+
+            if (isCorrect) {
+                p1m.style.opacity = "0";
+                p2m.innerText = "I KNEW IT! ❤️";
+                p2m.style.opacity = "1";
+                p1.style.left = "42%";
+                document.getElementById('p2').style.right = "42%";
+
+                setTimeout(() => {
+                    p1.style.opacity = "0";
+                    document.getElementById('p2').style.opacity = "0";
+                    document.getElementById('hug').style.opacity = "1";
+                    document.getElementById('hug').style.transform = "translateX(-50%) scale(1.2)";
+                    setTimeout(() => {
+                        document.getElementById('player-screen').classList.add('hidden');
+                        document.getElementById('reward-screen').classList.remove('hidden');
+                        document.getElementById('final-prize').innerText = questData.r;
+                        document.getElementById('final-name').innerText = questData.t.toUpperCase();
+                        triggerRain();
+                    }, 2500);
+                }, 1000);
+            } else {
+                p1m.innerText = dialogues[questData.g].sorry[Math.floor(Math.random() * 3)];
+                p2m.innerText = dialogues[questData.g].sass[Math.floor(Math.random() * 4)];
+                p1m.style.opacity = "1"; p2m.style.opacity = "1";
+                p1.style.transform = "scaleX(-1) translateX(-15px)";
+
+                setTimeout(() => {
+                    renderOptions();
+                    p1.style.transform = "scaleX(-1) translateX(0)";
+                    p1m.style.opacity = "0"; p2m.style.opacity = "0";
+                }, 2500);
+            }
+        }
+
+        function triggerRain() {
+            const em = ["🌹", "💖", "✨", "🎟️", "🥂"];
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    const c = document.createElement('div');
+                    c.className = 'confetti';
+                    c.innerText = em[Math.floor(Math.random() * em.length)];
+                    c.style.left = Math.random() * 100 + "vw";
+                    c.style.top = "-50px";
+                    c.style.fontSize = "25px";
+                    c.style.transition = "4s linear";
+                    document.body.appendChild(c);
+                    setTimeout(() => { c.style.top = "110vh"; c.style.transform = `rotate(${Math.random() * 360}deg)`; }, 50);
+                    setTimeout(() => c.remove(), 4500);
+                }, i * 150);
+            }
+        }
+    </script>
+</body>
+
+</html>
