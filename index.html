@@ -20,6 +20,7 @@
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         body {
@@ -32,119 +33,111 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+            padding: 10px;
         }
 
         .luxury-card {
             background: rgba(20, 0, 0, 0.85);
-            padding: 30px 20px;
-            border-radius: 40px;
+            padding: 25px 20px;
+            border-radius: 30px;
             border: 1px solid var(--gold-glow);
             box-shadow: 0 0 50px rgba(128, 15, 47, 0.4);
             text-align: center;
-            width: 92%;
-            max-width: 420px;
+            width: 100%;
+            max-width: 400px;
             position: relative;
             backdrop-filter: blur(15px);
-            z-index: 10;
         }
 
-        /* The Emotional Arena */
         #arena {
             position: relative;
             width: 100%;
-            height: 240px;
+            height: 200px;
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 30px;
+            border-radius: 25px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             overflow: hidden;
         }
 
         .char {
             position: absolute;
-            font-size: 3.5rem;
+            font-size: 3rem;
             transition: all 1.2s ease;
-            bottom: 20px;
+            bottom: 15px;
         }
 
         #p1 {
-            left: 10%;
+            left: 8%;
             transform: scaleX(-1);
         }
 
-        /* Player answering */
         #p2 {
-            right: 10%;
+            right: 8%;
         }
 
-        /* Creator watching */
         #hug {
             left: 50%;
             transform: translateX(-50%) scale(0);
-            font-size: 5rem;
-            bottom: 20px;
+            font-size: 4.5rem;
+            bottom: 15px;
             opacity: 0;
         }
 
-        /* Speech Bubbles */
         .msg-bubble {
             position: absolute;
-            padding: 10px 15px;
-            border-radius: 15px;
-            font-size: 0.75rem;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
             font-weight: 600;
             opacity: 0;
             transition: 0.4s;
-            max-width: 140px;
-            line-height: 1.3;
+            max-width: 120px;
+            line-height: 1.2;
         }
 
         #p1-msg {
             background: var(--petal);
             color: var(--crimson);
             left: 5%;
-            top: 70px;
+            top: 40%;
         }
 
         #p2-msg {
             background: var(--champagne);
             color: #300;
             right: 5%;
-            top: 30px;
-            border-radius: 15px 15px 2px 15px;
+            top: 15%;
         }
 
-        /* Forms & Buttons */
         .gender-selector {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
         .gender-btn {
-            padding: 12px;
+            padding: 10px;
             border: 1px solid var(--champagne);
             background: transparent;
             color: var(--champagne);
             border-radius: 12px;
             cursor: pointer;
-            width: 100px;
-            font-family: 'Playfair Display';
-            transition: 0.3s;
+            flex: 1;
+            font-size: 0.8rem;
         }
 
         .gender-btn.active {
             background: var(--champagne);
             color: #000;
-            box-shadow: 0 0 15px var(--gold-glow);
         }
 
         input {
             width: 100%;
-            padding: 14px;
-            margin: 8px 0;
-            border-radius: 15px;
+            padding: 12px;
+            margin: 6px 0;
+            border-radius: 12px;
             border: 1px solid var(--gold-glow);
             background: rgba(0, 0, 0, 0.4);
             color: var(--champagne);
@@ -156,104 +149,89 @@
             background: linear-gradient(135deg, var(--rose), var(--crimson));
             color: white;
             border: none;
-            padding: 16px;
-            border-radius: 20px;
+            padding: 15px;
+            border-radius: 18px;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(255, 143, 163, 0.2);
+            margin-top: 10px;
         }
 
         .opt-btn {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--petal);
-            padding: 14px;
+            padding: 12px;
             border-radius: 15px;
             width: 100%;
             margin-bottom: 8px;
             cursor: pointer;
-            transition: 0.3s;
             font-style: italic;
         }
 
-        .opt-btn:hover {
-            border-color: var(--rose);
-            background: rgba(255, 143, 163, 0.1);
+        /* TICKET UI */
+        #ticket-to-capture {
+            padding: 10px;
+            border-radius: 20px;
+            transition: 0.3s;
         }
 
-        /* THE TICKET UI */
         .ticket-container {
-            margin-top: 20px;
             background: var(--petal);
             color: var(--crimson);
             border-radius: 15px;
-            position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--champagne);
+            border: 1px solid var(--champagne);
         }
 
         .ticket-header {
             background: var(--crimson);
             color: var(--champagne);
-            padding: 8px;
-            font-size: 0.65rem;
+            padding: 6px;
+            font-size: 0.6rem;
             letter-spacing: 2px;
-            border-bottom: 2px dashed var(--petal);
         }
 
         .ticket-body {
-            padding: 25px 15px;
-            position: relative;
-            background-image: radial-gradient(circle at 0 50%, transparent 12px, var(--petal) 13px),
-                radial-gradient(circle at 100% 50%, transparent 12px, var(--petal) 13px);
+            padding: 25px 10px;
+            background-image: radial-gradient(circle at 0 50%, transparent 10px, var(--petal) 11px),
+                radial-gradient(circle at 100% 50%, transparent 10px, var(--petal) 11px);
         }
 
         .ticket-reward {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #4a0404;
             margin: 10px 0;
         }
 
-        .ticket-stub {
-            background: var(--champagne);
-            color: #000;
-            padding: 8px;
-            font-size: 0.6rem;
-            font-weight: bold;
+        .share-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        .valentine-wish {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+        .btn-outline {
+            flex: 1;
+            background: transparent;
+            border: 1px solid var(--champagne);
             color: var(--champagne);
-            margin-bottom: 5px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.03);
-                opacity: 0.8;
-            }
-        }
-
-        .confetti {
-            position: fixed;
-            z-index: 100;
-            pointer-events: none;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            cursor: pointer;
         }
 
         .hidden {
+            display: none !important;
+        }
+
+        .snapshot-mode {
+            background: #000 !important;
+        }
+
+        .snapshot-mode .btn-royal,
+        .snapshot-mode .share-actions {
             display: none !important;
         }
     </style>
@@ -262,24 +240,20 @@
 <body>
 
     <div id="creator-screen" class="luxury-card">
-        <h2 style="font-family: 'Playfair Display'; color: var(--champagne); margin-top:0;">Royal Architect</h2>
-        <p style="font-size: 0.75rem; color: var(--rose); margin-bottom: 15px;">Who are you in this story?</p>
-
+        <h2 style="font-family: 'Playfair Display'; color: var(--champagne); margin:0;">Royal Decree</h2>
         <div class="gender-selector">
             <button class="gender-btn active" id="btn-m" onclick="setGender('M')">KING 👑</button>
             <button class="gender-btn" id="btn-f" onclick="setGender('F')">QUEEN 👸</button>
         </div>
-
         <input type="text" id="c-target" placeholder="Partner's Name">
-        <input type="text" id="c-ques" placeholder="The Question Only We Know">
-        <input type="text" id="c-correct" placeholder="The Truth (Correct)">
-        <input type="text" id="c-w1" placeholder="A Little Lie #1">
-        <input type="text" id="c-w2" placeholder="A Little Lie #2">
-        <input type="text" id="c-reward" placeholder="The Reward (e.g. A Candlelight Dinner)">
-
-        <button class="btn-royal" onclick="generateLink()">Seal Magic Link</button>
+        <input type="text" id="c-ques" placeholder="The Secret Question">
+        <input type="text" id="c-correct" placeholder="The Correct Answer">
+        <input type="text" id="c-w1" placeholder="Wrong Option 1">
+        <input type="text" id="c-w2" placeholder="Wrong Option 2">
+        <input type="text" id="c-reward" placeholder="The Reward">
+        <button class="btn-royal" onclick="generateLink()">Seal & Copy Link</button>
         <div id="link-box" class="hidden"
-            style="margin-top:15px; font-size:0.6rem; border:1px solid var(--rose); padding:8px; word-break:break-all;">
+            style="margin-top:10px; font-size:0.5rem; border:1px solid var(--rose); padding:8px; word-break:break-all; background: rgba(0,0,0,0.5);">
         </div>
     </div>
 
@@ -291,46 +265,46 @@
             <div id="p2" class="char"></div>
             <div id="hug" class="char">👩‍❤️‍👨</div>
         </div>
-        <div id="quiz-area">
-            <h3 style="font-family: 'Playfair Display'; color: var(--champagne); font-size: 1.1rem;" id="display-q">
-            </h3>
-            <div id="options-area"></div>
-        </div>
+        <h3 id="display-q" style="font-size: 1rem; color: var(--champagne); font-family: 'Playfair Display';"></h3>
+        <div id="options-area"></div>
     </div>
 
     <div id="reward-screen" class="luxury-card hidden">
-        <div class="valentine-wish">Happy Valentine's Day</div>
-        <div class="ticket-container">
-            <div class="ticket-header">ROYAL LOVE PASS • ADMIT ONE</div>
-            <div class="ticket-body">
-                <p style="font-size: 0.6rem; margin: 0; opacity: 0.7;">REDEEMABLE BY</p>
-                <div style="font-family: 'Playfair Display'; font-weight: bold; font-size: 1.1rem;" id="final-name">
+        <div id="ticket-to-capture">
+            <div
+                style="font-family: 'Playfair Display'; font-size: 1.4rem; color: var(--champagne); margin-bottom:10px;">
+                Happy Valentine's Day</div>
+            <div class="ticket-container">
+                <div class="ticket-header">ROYAL LOVE PASS • 2026</div>
+                <div class="ticket-body">
+                    <p style="font-size: 0.5rem; margin: 0; opacity: 0.7;">REDEEMABLE BY</p>
+                    <div style="font-family: 'Playfair Display'; font-weight: bold; font-size: 1rem;" id="final-name">
+                    </div>
+                    <div class="ticket-reward" id="final-prize"></div>
+                    <p style="font-size: 0.5rem; margin: 0; letter-spacing: 1px;">VALID ACROSS ALL LIFETIMES</p>
                 </div>
-                <div class="ticket-reward" id="final-prize"></div>
-                <p style="font-size: 0.5rem; margin: 0; letter-spacing: 1px;">VALID ACROSS ALL LIFETIMES</p>
             </div>
-            <div class="ticket-stub">SERIAL: LOVE-2026-VAL</div>
+            <p style="font-family: 'Dancing Script'; font-size: 1.2rem; color: var(--rose); margin-top: 10px;">"Forever
+                is a long time, and I want to spend it with you."</p>
         </div>
-        <p style="font-family: 'Dancing Script'; font-size: 1.5rem; color: var(--rose); margin-top: 15px;">Always &
-            Forever.</p>
-        <button class="btn-royal" style="padding: 10px; font-size: 0.7rem; width: auto;"
-            onclick="location.href=window.location.pathname">Create New</button>
+
+        <div class="share-actions">
+            <!-- <button class="btn-outline" onclick="prepareSnapshot()">📸 Snapshot</button> -->
+            <button class="btn-outline" onclick="shareTrial()">🔗 Share App</button>
+        </div>
+        <button class="btn-royal" onclick="location.href=window.location.pathname">Create New</button>
+        <p id="snapshot-hint" class="hidden" style="font-size: 0.6rem; color: var(--champagne); margin-top: 10px;">
+            Buttons hidden. Take your screenshot now!<br><span onclick="exitSnapshot()"
+                style="text-decoration: underline; cursor: pointer;">Click here to go back</span></p>
     </div>
 
     <script>
         let selectedGender = 'M';
         let questData = {};
-        const prefixes = ["Perhaps ", "Simply ", "Always ", "Only ", "Actually "];
-
+        const prefixes = ["Actually, ", "Simply ", "Always ", "Only "];
         const dialogues = {
-            'M': { // King created, Queen plays
-                sass: ["My Queen, really? 🤨", "Are you testing me? 🌹", "Try again, beautiful.", "Think deeply..."],
-                sorry: ["I'll fix it! 🥺", "Don't be mad... 🙇‍♀️", "I promise I know this!"]
-            },
-            'F': { // Queen created, King plays
-                sass: ["How could you forget? 😒", "Do you even love me? 💅", "Wrong answer, mister!", "I'm waiting... 🥀"],
-                sorry: ["I'm so sorry! 😭", "Forgive me, My Queen! 🙇‍♂️", "One more chance!"]
-            }
+            'M': { sass: ["Try again? 🌹", "Are you testing me? 🤨"], sorry: ["Don't be mad... 🙇‍♀️", "I promise I know this!"] },
+            'F': { sass: ["How could you? 😒", "Do you even love me? 💅"], sorry: ["I'm so sorry! 😭", "Forgive me! 🙇‍♂️"] }
         };
 
         function setGender(g) {
@@ -341,22 +315,18 @@
 
         function generateLink() {
             const data = {
-                g: selectedGender,
-                t: document.getElementById('c-target').value,
-                q: document.getElementById('c-ques').value,
-                c: document.getElementById('c-correct').value,
-                w1: document.getElementById('c-w1').value,
-                w2: document.getElementById('c-w2').value,
+                g: selectedGender, t: document.getElementById('c-target').value,
+                q: document.getElementById('c-ques').value, c: document.getElementById('c-correct').value,
+                w1: document.getElementById('c-w1').value, w2: document.getElementById('c-w2').value,
                 r: document.getElementById('c-reward').value
             };
-            if (!data.t || !data.q || !data.c || !data.r) return alert("Fill every detail with love!");
+            if (!data.t || !data.q || !data.c || !data.r) return alert("Fill all details!");
             const blob = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
             const url = window.location.origin + window.location.pathname + "?trial=" + blob;
-            const linkBox = document.getElementById('link-box');
-            linkBox.innerText = url;
-            linkBox.classList.remove('hidden');
+            document.getElementById('link-box').innerText = url;
+            document.getElementById('link-box').classList.remove('hidden');
             navigator.clipboard.writeText(url);
-            alert("The Decree is forged and copied!");
+            alert("Magic Link Copied! Send it to your partner.");
         }
 
         window.onload = () => {
@@ -365,8 +335,6 @@
                 document.getElementById('creator-screen').classList.add('hidden');
                 document.getElementById('player-screen').classList.remove('hidden');
                 questData = JSON.parse(decodeURIComponent(escape(atob(params.get('trial')))));
-
-                // Set roles: Creator (p2) and Player (p1)
                 document.getElementById('p2').innerText = questData.g === 'M' ? "🤴" : "👸";
                 document.getElementById('p1').innerText = questData.g === 'M' ? "💃" : "🏃‍♂️";
                 document.getElementById('display-q').innerText = `"${questData.q}"`;
@@ -375,78 +343,73 @@
         };
 
         function renderOptions() {
-            const area = document.getElementById('options-area');
-            area.innerHTML = '';
-            let opts = [
-                { t: questData.c, is: true },
-                { t: questData.w1, is: false },
-                { t: questData.w2, is: false }
-            ].sort(() => Math.random() - 0.5);
-
+            const area = document.getElementById('options-area'); area.innerHTML = '';
+            let opts = [{ t: questData.c, is: true }, { t: questData.w1, is: false }, { t: questData.w2, is: false }].sort(() => Math.random() - 0.5);
             opts.forEach(o => {
                 const btn = document.createElement('button');
-                btn.className = 'opt-btn';
-                const p = prefixes[Math.floor(Math.random() * prefixes.length)];
-                btn.innerText = p + o.t;
-                btn.onclick = () => checkAnswer(o.is);
-                area.appendChild(btn);
+                btn.className = 'opt-btn'; btn.innerText = prefixes[Math.floor(Math.random() * prefixes.length)] + o.t;
+                btn.onclick = () => checkAnswer(o.is); area.appendChild(btn);
             });
         }
 
         function checkAnswer(isCorrect) {
-            const p1m = document.getElementById('p1-msg');
-            const p2m = document.getElementById('p2-msg');
+            const p1m = document.getElementById('p1-msg'); const p2m = document.getElementById('p2-msg');
             const p1 = document.getElementById('p1');
-
             if (isCorrect) {
-                p1m.style.opacity = "0";
-                p2m.innerText = "I KNEW IT! ❤️";
-                p2m.style.opacity = "1";
-                p1.style.left = "42%";
-                document.getElementById('p2').style.right = "42%";
-
+                p1m.style.opacity = "0"; p2m.innerText = "YES! ❤️"; p2m.style.opacity = "1";
+                p1.style.left = "42%"; document.getElementById('p2').style.right = "42%";
                 setTimeout(() => {
-                    p1.style.opacity = "0";
-                    document.getElementById('p2').style.opacity = "0";
-                    document.getElementById('hug').style.opacity = "1";
-                    document.getElementById('hug').style.transform = "translateX(-50%) scale(1.2)";
+                    p1.style.opacity = "0"; document.getElementById('p2').style.opacity = "0";
+                    document.getElementById('hug').style.opacity = "1"; document.getElementById('hug').style.transform = "translateX(-50%) scale(1.1)";
                     setTimeout(() => {
                         document.getElementById('player-screen').classList.add('hidden');
                         document.getElementById('reward-screen').classList.remove('hidden');
                         document.getElementById('final-prize').innerText = questData.r;
                         document.getElementById('final-name').innerText = questData.t.toUpperCase();
                         triggerRain();
-                    }, 2500);
+                    }, 2000);
                 }, 1000);
             } else {
-                p1m.innerText = dialogues[questData.g].sorry[Math.floor(Math.random() * 3)];
-                p2m.innerText = dialogues[questData.g].sass[Math.floor(Math.random() * 4)];
+                p1m.innerText = dialogues[questData.g].sorry[Math.floor(Math.random() * 2)];
+                p2m.innerText = dialogues[questData.g].sass[Math.floor(Math.random() * 2)];
                 p1m.style.opacity = "1"; p2m.style.opacity = "1";
-                p1.style.transform = "scaleX(-1) translateX(-15px)";
-
-                setTimeout(() => {
-                    renderOptions();
-                    p1.style.transform = "scaleX(-1) translateX(0)";
-                    p1m.style.opacity = "0"; p2m.style.opacity = "0";
-                }, 2500);
+                setTimeout(() => { renderOptions(); p1m.style.opacity = "0"; p2m.style.opacity = "0"; }, 2500);
             }
         }
 
         function triggerRain() {
-            const em = ["🌹", "💖", "✨", "🎟️", "🥂"];
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 30; i++) {
                 setTimeout(() => {
                     const c = document.createElement('div');
-                    c.className = 'confetti';
-                    c.innerText = em[Math.floor(Math.random() * em.length)];
-                    c.style.left = Math.random() * 100 + "vw";
-                    c.style.top = "-50px";
-                    c.style.fontSize = "25px";
-                    c.style.transition = "4s linear";
-                    document.body.appendChild(c);
-                    setTimeout(() => { c.style.top = "110vh"; c.style.transform = `rotate(${Math.random() * 360}deg)`; }, 50);
-                    setTimeout(() => c.remove(), 4500);
+                    c.style.position = "fixed"; c.innerText = "💖"; c.style.left = Math.random() * 100 + "vw";
+                    c.style.top = "-50px"; c.style.transition = "4s linear"; document.body.appendChild(c);
+                    setTimeout(() => { c.style.top = "110vh"; }, 50); setTimeout(() => c.remove(), 4500);
                 }, i * 150);
+            }
+        }
+
+        /* NEW SHARING FUNCTIONS */
+        function prepareSnapshot() {
+            document.querySelector('.luxury-card').classList.add('snapshot-mode');
+            document.getElementById('snapshot-hint').classList.remove('hidden');
+            alert("Buttons are hidden for a clean photo. Take a screenshot now!");
+        }
+
+        function exitSnapshot() {
+            document.querySelector('.luxury-card').classList.remove('snapshot-mode');
+            document.getElementById('snapshot-hint').classList.add('hidden');
+        }
+
+        function shareTrial() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Royal Love Trial',
+                    text: 'I completed the challenge! Can you?',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert("Link copied to clipboard for sharing!");
             }
         }
     </script>
